@@ -33,46 +33,9 @@ def urlify(s):
     return s
 
 def getgenre(genreID):
-	if genreID==1:
-		genre="Action"
-	elif genreID==2:
-		genre="Adventure"
-	elif genreID==3:
-		genre="Construction and Management Simulation"
-	elif genreID==4:
-		genre="Role-Playing"
-	elif genreID==5:
-		genre="Puzzle"
-	elif genreID==6:
-		genre="Strategy"
-	elif genreID==7:
-		genre="Racing"
-	elif genreID==8:
-		genre="Shooter"
-	elif genreID==9:
-		genre="Life Simulation"
-	elif genreID==10:
-		genre ="Fighting"
-	elif genreID==11:
-		genre="Sports"
-	elif genreID==12:
-		genre="Sandbox"
-	elif genreID==13:
-		genre="Flight Simulator"
-	elif genreID==14:
-		genre="MMO"
-	elif genreID==15:
-		genre="Platform"
-	elif genreID==16:
-		genre="Stealth"
-	elif genreID==17:
-		genre="Music"
-	elif genreID==18:
-		genre="Horror"
-	elif genreID==19:
-		genre="Vehicle Simulation"
-	else:
-		genre="not listed/no genre"
+	genres=['Action', 'Adventure', 'Construction and Management Simulation', 'Role-Playing', 'Puzzle', 'Strategy', 'Racing', 'Shooter', 'Life Simulation', 'Fighting', 'Sports', 'Sandbox', 'Flight  Simulator', 'MMO', 'Platform', 'Stealth', 'Music', 'Horror', 'Vehicle Simulation']
+	genre=[genres[genreID-1]]
+	
 	return genre
 
 
