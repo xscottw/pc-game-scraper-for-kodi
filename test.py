@@ -41,8 +41,8 @@ def scrape(game):
 	gameDevs = []
 	genreNames = [] 
 	search = (s_url+game+"&fields=publishers%2Cgenres%2Coverview&filter%5Bplatform%5D=1")
-	response = requests.get(search, headers = headers)
-	parsed_response = json.loa"&fields=publishers%2Cgenres%2Coverview&filter%5Bplatform%5D=1")ds(response.text)
+	response = requests.get(search, headers=headers)
+	parsed_response = json.loads(response.text)
 	if(parsed_repsonse['data']['count']>0):
 		game_D = parsed_response['data']['games'][0]
 		game_ids.append(game_D['id'])
