@@ -50,7 +50,7 @@ def scrape(game):
 		year_rlsd = game_D['release_date'][:4]
 		genres = game_D['genres']
 		for genreID in genres:
-			genreNames.append(genres[genresID-1])
+			genreNames.append(genres[genreID-1])
 		devIDs = game_D['developers']
 		for ID in devIDs:
 			ID = str(ID)
