@@ -14,13 +14,16 @@ root.withdraw()
 directory = filedialog.askdirectory()
 dev_list = []
 c = 0
-dev = "https://api.thegamesdb.net/Developers?apikey=f875e798c9312f187fa54d982079111fd02adfa72d5b4ad4157c5ec6374e283b"
 
-base_url = "https://api.thegamesdb.net/"
-image_url = ("https://api.thegamesdb.net/Games/Images?apikey=f875e798c9312f187fa54d982079111fd02adfa72d5b4ad4157c5ec6374e283b&games_id=")
+genres=['Action', 'Adventure', 'Construction and Management Simulation', 'Role-Playing', 'Puzzle', 'Strategy', 'Racing', 'Shooter', 'Life Simulation', 'Fighting', 'Sports', 'Sandbox', 'Flight  Simulator', 'MMO', 'Platform', 'Stealth', 'Music', 'Horror', 'Vehicle Simulation']
 
-dev_resp = requests.get(dev, headers=headers)
+b_url = "https://api.thegamesdb.net/"
+image_url = (b_url+"Games/Images?apikey="+apikey+"&games_id=")
+s_url = (b_url+"/Games/ByGameName?apikey="+apikey+"&name")
+
+dev_resp = requests.get(b_url+"Developers?apikey="+apikey, headers=headers)
 prsd_dev = json.loads(dev_resp.text)
+
 
 def urlify(s):
 
@@ -32,27 +35,22 @@ def urlify(s):
 
     return s
 
-def getgenre(genreID):
-	genres=['Action', 'Adventure', 'Construction and Management Simulation', 'Role-Playing', 'Puzzle', 'Strategy', 'Racing', 'Shooter', 'Life Simulation', 'Fighting', 'Sports', 'Sandbox', 'Flight  Simulator', 'MMO', 'Platform', 'Stealth', 'Music', 'Horror', 'Vehicle Simulation']
-	genre=[genres[genreID-1]]
-	
-	return genre
-
-
+# This scrapes 'thegamesDB' for the gameIDs (you need those to search for 
+# fanart) and most of the text info such as genres title etc.
 def scrape(game):
-	gameDevs=[]
-	genreNames = []
-	search = ("https://api.thegamesdb.net/Games/ByGameName?apikey="+apikey+"&name="+game+"&fields=publishers%2Cgenres%2Coverview&filter%5Bplatform%5D=1")
-	response = requests.get(search, headers=headers)
-	parsed_response = json.loads(response.text)
-	if(parsed_response['data']['count']>0):
+	gameDevs = []
+	genreNames = [] 
+	search = (s_url+game+"&fields=publishers%2Cgenres%2Coverview&filter%5Bplatform%5D=1")
+	response = requests.get(search, headers = headers)
+	parsed_response = json.loa"&fields=publishers%2Cgenres%2Coverview&filter%5Bplatform%5D=1")ds(response.text)
+	if(parsed_repsonse['data']['count']>0):
 		game_D = parsed_response['data']['games'][0]
 		game_ids.append(game_D['id'])
 		name = game_D['game_title']
 		year_rlsd = game_D['release_date'][:4]
 		genres = game_D['genres']
 		for genreID in genres:
-			genreNames.append(getgenre(genreID))
+			genreNames.append(genres[genresID-1])
 		devIDs = game_D['developers']
 		for ID in devIDs:
 			ID = str(ID)
@@ -61,6 +59,10 @@ def scrape(game):
 	else:
 		game_ids.append([])
 	return name, year_rlsd, genreNames, gameDevs, plot
+#I may add one or two other scrapers here for icons/trailers if thegamesdb
+#doesnt add them
+#def icon_scr(game)
+#def trailer_scr(game)
 	
 #This one generates the needed xml 
 def generatexml(game):
@@ -180,3 +182,4 @@ for game in games:
 	with open(xmldir+urlify(game)+".xml", "w+") as myfile:
 		myfile.write(str(generatexml(game)))
 	c+=1
+
