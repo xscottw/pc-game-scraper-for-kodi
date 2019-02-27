@@ -14,3 +14,8 @@ add trailers
 list all images chosen to user (i.e. if there are 8 fanart images which would you like to be assigned) 
 
 make offline version 
+
+Make the scraper 'smart' in terms of finding/identifying games in the OS
+
+add linux directory  support
+
